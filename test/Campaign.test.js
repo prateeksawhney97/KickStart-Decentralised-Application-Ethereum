@@ -22,9 +22,16 @@ beforeEach(async ()=> {
       gas: '1000000'
     });
 
-    [campaignAddress] = await factory.methods.getDeployedContracts().call();
+    [campaignAddress] = await factory.methods.getDeployedCampaigns().call();
     campaign = await new web3.eth.Contract(
       JSON.parse(compiledCampaign.interface),
       campaignAddress
     );
+});
+
+describe('Campaigns', ()=> {
+  it('deploys a factory and a campaign', ()=> {
+    assert.ok(factory.options.address);
+    assert.ok(campaign.options.address);
+  });
 });
